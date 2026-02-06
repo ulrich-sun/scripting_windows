@@ -2,7 +2,32 @@
 
 ## 📋 Description
 
-This tool provides a graphical interface for automated installation of multiple Windows components and applications. It supports silent installations, dependency management, SQL Server configuration, and Windows system configuration.
+This tool provides both a **PowerShell module** and a **graphical interface** for automated installation of multiple Windows components and applications. It supports silent installations, dependency management, SQL Server configuration, and Windows system configuration.
+
+## 🆕 NEW: PowerShell Module
+
+The tool is now available as a **PowerShell module** (`WindowsComponentInstaller`) with 10 exported functions for maximum flexibility:
+
+- ✅ **GUI Mode** - Interactive Windows Forms interface
+- ✅ **Programmatic Mode** - Full PowerShell API
+- ✅ **Module Functions** - Import and use in your own scripts
+- ✅ **Comment-Based Help** - Full `Get-Help` support
+
+**Quick Start:**
+```powershell
+# Import module
+Import-Module .\WindowsComponentInstaller
+
+# Show GUI
+Show-ComponentInstallerGUI
+
+# Or install programmatically
+$component = Get-ComponentList | Where-Object { $_.Name -eq "7-Zip" }
+Install-WindowsComponent -Component $component
+```
+
+👉 See **[MODULE.md](MODULE.md)** for complete module documentation  
+👉 See **[Example-ProgrammaticInstall.ps1](Example-ProgrammaticInstall.ps1)** for 9 usage examples
 
 ## 🖥️ Supported Systems
 
@@ -79,34 +104,91 @@ Installers/
 
 ## 🚀 Usage
 
-### Step 1: Prepare Installers
-1. Create the `Installers` folder in the script directory
-2. Download and place all required installer files
-3. Ensure file names match the configuration
+### Option 1: PowerShell Module (Recommended)
 
-### Step 2: Run as Administrator
 ```powershell
-# Right-click PowerShell and select "Run as Administrator"
-# Navigate to the script directory
-cd C:\Path\To\Script
+# Import the module
+Import-Module .\WindowsComponentInstaller
 
-# Run the script
+# Method A: Show GUI
+Show-ComponentInstallerGUI
+
+# Method B: Programmatic installation
+$component = Get-ComponentList | Where-Object { $_.Name -eq "7-Zip" }
+Install-WindowsComponent -Component $component
+
+# Method C: Batch installation
+$components = Get-ComponentList | Where-Object { 
+    $_.Name -in @("7-Zip", "Visual C++ Redistributable x64")
+}
+foreach ($comp in $components | Sort-Object Priority) {
+    Install-WindowsComponent -Component $comp
+}
+```
+
+See **[MODULE.md](MODULE.md)** for complete module documentation and examples.
+
+### Option 2: Wrapper Script (Backward Compatible)
+
+```powershell
+# Run the wrapper script (launches GUI automatically)
+.\Start-ComponentInstaller.ps1
+```
+
+### Option 3: Original Script
+
+```powershell
+# Run the original standalone script
 .\Install-WindowsComponents.ps1
 ```
 
-### Step 3: Select Components
-1. The GUI will display all available components
-2. Check the boxes for components you want to install
-3. If installing SQL Server, enter the SA password
-4. Optionally enable Windows configuration options:
-   - Disable Windows Firewall
-   - Configure locale to en-US
+## 📖 Available Scripts
 
-### Step 4: Start Installation
-1. Click the **Install** button
-2. Wait for the installation to complete
-3. Review the installation summary
-4. Check the log file for detailed information
+| Script | Description |
+|--------|-------------|
+| `Start-ComponentInstaller.ps1` | Wrapper script that imports module and launches GUI |
+| `Install-WindowsComponents.ps1` | Original standalone script (still works) |
+| `Example-ProgrammaticInstall.ps1` | 9 examples showing programmatic usage |
+
+## 📚 Documentation Files
+
+| File | Description |
+|------|-------------|
+| **[MODULE.md](MODULE.md)** | Complete module documentation with usage examples |
+| **[README.md](README.md)** | This file - general overview and usage |
+| **[QUICKSTART.md](QUICKSTART.md)** | Quick 5-minute setup guide |
+| **[CONFIG.md](CONFIG.md)** | Detailed configuration options |
+| **[EXAMPLES.md](EXAMPLES.md)** | Real-world usage scenarios |
+| **[ARCHITECTURE.md](ARCHITECTURE.md)** | System architecture and flow diagrams |
+
+## 📦 Module Functions
+
+The `WindowsComponentInstaller` module exports 10 public functions:
+
+```powershell
+# Get help for any function
+Get-Help Show-ComponentInstallerGUI -Full
+Get-Help Install-WindowsComponent -Examples
+
+# List all functions
+Get-Command -Module WindowsComponentInstaller
+```
+
+### Core Functions
+- `Show-ComponentInstallerGUI` - Launch GUI
+- `Install-WindowsComponent` - Install component
+- `Install-SQLServerInstance` - SQL Server installer
+- `Get-ComponentList` - Get available components
+
+### Utility Functions
+- `Get-SystemArchitecture` - Detect x86/x64
+- `Test-ComponentFile` - Check file exists
+- `Invoke-PostInstallationVerification` - Verify installs
+
+### Configuration Functions
+- `Disable-WindowsFirewall` - Disable firewall
+- `Set-SystemLocaleToEnglishUS` - Configure locale
+- `Write-InstallLog` - Log messages
 
 ## 📊 Installation Order
 
