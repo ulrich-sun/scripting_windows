@@ -1,0 +1,31 @@
+# Installation logs
+InstallationLog_*.txt
+
+# Temporary files
+*.tmp
+*.temp
+~$*
+
+# Windows thumbnail cache
+Thumbs.db
+ehthumbs.db
+
+# Folder config files
+Desktop.ini
+
+# Actual installer executables (too large for git)
+Installers/*.exe
+Installers/*.msi
+
+# Keep the README in Installers folder
+!Installers/README.md
+
+# PowerShell temporary files
+*.ps1~
+
+# Backup files
+*.bak
+*.backup
+
+# System files
+.DS_Store
