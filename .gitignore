@@ -1,0 +1,80 @@
+# Fichiers et dossiers à ignorer
+
+# Logs
+*.log
+*.txt
+C:/Support/
+
+# Fichiers temporaires PowerShell
+*.tmp
+*.temp
+
+# Fichiers de configuration locaux (contiennent des codes de déploiement)
+config.local.json
+*.local.json
+
+# Fichiers d'installation téléchargés
+*.exe
+*.msi
+*.zip
+
+# Dossier temporaire
+Temp/
+temp/
+tmp/
+
+# Fichiers système Windows
+Thumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+*.lnk
+
+# Transcriptions PowerShell
+transcript_*.txt
+
+# Sauvegardes
+*.bak
+*.backup
+
+# Fichiers de test
+test_*.ps1
+*_test.ps1
+
+# Credentials et secrets
+credentials.xml
+secrets.json
+*.credential
+
+# Rapports de déploiement locaux
+deployment_report*.json
+installation_log*.txt
+
+# Fichiers VS Code
+.vscode/
+*.code-workspace
+
+# Fichiers IDE
+.idea/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# Fichiers Mac
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Archives
+*.7z
+*.dmg
+*.gz
+*.iso
+*.jar
+*.rar
+*.tar
+*.zip
+
+# Fichiers de cache
+cache/
+*.cache
