@@ -1,0 +1,11 @@
+{
+  "SplashtopDeployCode": "VOTRE_CODE_DEPLOIEMENT_ICI",
+  "CustomSoftware": {
+    "Name": "NomDuLogiciel",
+    "Url": "https://example.com/software.exe",
+    "Args": "/S /v/qn",
+    "Hash": ""
+  },
+  "SupportUrl": "https://sso.splashtop.com",
+  "TimeoutSeconds": 300
+}
